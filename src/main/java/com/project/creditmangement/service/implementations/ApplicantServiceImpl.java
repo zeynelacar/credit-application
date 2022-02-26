@@ -1,5 +1,6 @@
 package com.project.creditmangement.service.implementations;
 
+import com.project.creditmangement.exception.NotFoundException;
 import com.project.creditmangement.model.Applicant;
 import com.project.creditmangement.repository.ApplicantRepository;
 import com.project.creditmangement.service.ApplicantService;
@@ -25,15 +26,15 @@ public class ApplicantServiceImpl implements ApplicantService {
     @Override
     public Applicant getApplicant(String nationalId) {
 
-        if(questionApplicant(nationalId)){
-            return applicantRepository.findByNationalNo(nationalId);
-        }else{
-            throw new RuntimeException("Applicant not found");
+        try {
+            Applicant applicant = applicantRepository.findByNationalNo(nationalId);
+            return applicant;
+        }catch(Exception e){
+            throw new NotFoundException("Applicant");
         }
-    }   /*List<Applicant> allApplicants = getAllApplicants();
-        return allApplicants.stream()
-                .filter(a-> a.getNationalId().equals(nationalId))
-                .collect(Collectors.toList());*/
+            //throw new NotFoundException("Applicant");
+
+    }
 
     @Override
     public Boolean questionApplicant(String nationalId) {

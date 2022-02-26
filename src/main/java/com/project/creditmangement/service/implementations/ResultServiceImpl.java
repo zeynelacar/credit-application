@@ -1,5 +1,6 @@
 package com.project.creditmangement.service.implementations;
 
+import com.project.creditmangement.exception.NotFoundException;
 import com.project.creditmangement.model.Applicant;
 import com.project.creditmangement.model.Result;
 import com.project.creditmangement.repository.ResultRepository;
@@ -7,6 +8,7 @@ import com.project.creditmangement.service.ApplicantService;
 import com.project.creditmangement.service.ResultService;
 import com.project.creditmangement.service.ScoreService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,7 @@ public class ResultServiceImpl implements ResultService {
 
     private final ResultRepository resultRepository;
 
+    @Autowired
     private final ScoreService scoreService;
 
     private final ApplicantService applicantService;
@@ -32,15 +35,12 @@ public class ResultServiceImpl implements ResultService {
         try{
             return resultRepository.findByNationalNo(nationalId);
         }catch(Exception e){
-            throw new RuntimeException("Result not found");
+            throw new NotFoundException("Result");
         }
     }
 
     public Integer calculateLimit(Integer score,Integer monthlyIncome){
-
-
          int limit = 0;
-
          try{
              if(score>=500&&score<1000){
                  if(monthlyIncome<5000){
@@ -58,29 +58,27 @@ public class ResultServiceImpl implements ResultService {
          }catch(Exception e){
 
             throw  new RuntimeException("Service unavailable");
-
         }
-
-
 
     }
 
     @Override
-    public String createResult(Applicant applicant) {
+    public String createResult(String nationalId, Integer monthlyIncome) {
 
 
         Result result = new Result();
-        Integer monthlyIncome =applicant.getMonthlyIncome();
-        Integer score = scoreService.getScore(applicant.getNationalNo()).getCreditScore();
+        Integer score = scoreService.getScore(nationalId).getCreditScore();
         if(score<500){
             result.setApplicationResult("Denied");
+            result.setLimit(0);
         }else{
             result.setApplicationResult("Approved");
             result.setLimit(calculateLimit(score,monthlyIncome));
         }
-        result.setNationalNo(applicant.getNationalNo());
+        result.setNationalNo(nationalId);
         resultRepository.save(result);
-        return result.getApplicationResult();
+        String finalRes = "Result of your application:" + result.getApplicationResult() + "  " + " Your credit limit is:" + result.getLimit().toString();
+        return (finalRes);
 
     }
 
@@ -90,16 +88,13 @@ public class ResultServiceImpl implements ResultService {
             applicantService.addApplicant(applicant);
             scoreService.createScore(applicant.getNationalNo());
         }
-        return createResult(applicant);
+        return createResult(applicant.getNationalNo(),applicant.getMonthlyIncome());
     }
 
-    @Override
-    public Result updateResult(Applicant applicant) {
-        return null;
-    }
 
     @Override
     public boolean deleteResult(String nationalId) {
-        return false;
+        resultRepository.delete(getResult(nationalId));
+        return true;
     }
 }

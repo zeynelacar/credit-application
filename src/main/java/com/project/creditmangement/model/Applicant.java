@@ -28,10 +28,10 @@ public class Applicant implements Serializable {
     @NotNull
     private String surname;
 
-    @NaturalId
+
     @NotNull
     @Column(name="national_no")
-    private String nationalNo;
+    public String nationalNo;
 
     @NotNull
     private Integer monthlyIncome;

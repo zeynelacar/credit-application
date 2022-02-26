@@ -29,17 +29,17 @@ public class ApplicantController {
     }
 
     @PostMapping(value ="/add")
-    public void addFlat(@RequestBody Applicant applicant){
+    public void addApplicant(@RequestBody Applicant applicant){
         applicantService.addApplicant(applicant);
     }
 
     @PutMapping(value="/update")
-    public Applicant updateFlat(@RequestBody Applicant applicant){
+    public Applicant updateApplicant(@RequestBody Applicant applicant){
         return applicantService.updateApplicant(applicant);
     }
 
     @DeleteMapping(value = "/delete")
-    public boolean deleteFlat(@RequestParam @Min(1) String nationalId) {
+    public boolean deleteApplicant(@RequestParam @Min(1) String nationalId) {
         return applicantService.deleteApplicant(nationalId);
     }
 

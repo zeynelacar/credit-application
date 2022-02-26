@@ -1,5 +1,7 @@
 package com.project.creditmangement.service.implementations;
 
+import com.project.creditmangement.exception.InvalidRequestException;
+import com.project.creditmangement.exception.NotFoundException;
 import com.project.creditmangement.model.Applicant;
 import com.project.creditmangement.model.Score;
 import com.project.creditmangement.repository.ScoreRepository;
@@ -25,13 +27,12 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public Score getScore(String nationalId) {
         try{
-            if(applicantService.questionApplicant(nationalId)){
-                return scoreRepository.findByNationalNo(nationalId);
-            }else{
-                return createScore(nationalId);
+            if (!applicantService.questionApplicant(nationalId)) {
+                createScore(nationalId);
             }
+            return scoreRepository.findByNationalNo(nationalId);
         }catch(Exception e){
-            throw new RuntimeException("Score not found");
+            throw new InvalidRequestException("Invalid Request");
         }
     }
 
@@ -42,14 +43,15 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public Score createScore(String nationalId) {
+    public Boolean createScore(String nationalId) {
 
 
         Score score = new Score();
         int randomScore = ThreadLocalRandom.current().nextInt(0,1500);
         score.setNationalNo(nationalId);
         score.setCreditScore(randomScore);
-        return scoreRepository.save(score);
+        scoreRepository.save(score);
+        return true;
 
     }
 

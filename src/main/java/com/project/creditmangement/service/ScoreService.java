@@ -12,6 +12,6 @@ public interface ScoreService {
 
     Score getScore(String nationalId);
 
-    Score createScore(String nationalId);
+    Boolean createScore(String nationalId);
 
 }

@@ -12,11 +12,9 @@ public interface ResultService {
 
     Result getResult(String nationalId);
 
-    String createResult(@RequestBody Applicant applicant);
+    String createResult(String nationalId, Integer monthlyIncome);
 
     String makeApplication(@RequestBody Applicant applicant);
-
-    Result updateResult(@RequestBody Applicant applicant);
 
     boolean deleteResult(String nationalId);
 
