@@ -1,24 +1,36 @@
-version: 2 # use CircleCI 2.0 #
-jobs: # a collection of steps
+version: 2
+jobs:
   build:
-
-  docker: # run the steps with Docker
-  — image: circleci/openjdk:8-jdk-stretch # …with this image as the primary container; this is where all `steps` will run
-
-  steps: # a collection of executable commands
-    — checkout
-  # — run: ./mvnw clean install # mvn clean install tells Maven to do the clean phase in each module before running the install phase for each module.
-    - run: mvn test
-    - run:
-        name: Save results
-        command: |
-          mkdir -p ~/test-results/junit/
-          find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
-        when: always
-    -store_test_results:
-      path: ~/test-results/junit
-    -store_artifacts:
-      path: ~/test-results/junit
+    docker:
+      - image: circleci/openjdk:8-jdk
+      - image: circleci/postgres:9.4
+    working_directory: ~/repo
+    environment:
+      MAVEN_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-
+      - run: mvn dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+      - run: mvn test
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/test-results/junit
+      - store_artifacts:
+          path: ~/test-results/junit
+      - store_artifacts:
+          path:  target/my-reports
 
 
 

@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Data
@@ -30,6 +32,7 @@ public class Applicant implements Serializable {
 
 
     @NotNull
+    @Size(min=11,max=11,message = "National Identity Number must be 11 characters")
     @Column(name="national_no")
     public String nationalNo;
 

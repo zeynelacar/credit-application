@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
@@ -21,10 +22,8 @@ public class Score {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    //@ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    //@JoinColumn(name = "national_no",referencedColumnName = "national_no")
-    //@JsonIgnoreProperties({"name","surname","monthlyIncome","phone","id"})
     @Column(name="national_no")
+    @Size(min=11,max=11,message = "National Identity Number must be 11 characters")
     private String nationalNo;
 
     @Column(name="credit_score")
