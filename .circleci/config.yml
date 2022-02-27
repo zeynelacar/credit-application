@@ -4,19 +4,19 @@ jobs:
     docker:
     — image: circleci/openjdk:8-jdk
     steps:
-     — checkout
-     -run mvn test
-     -run
-       name Save results
-       command |
-            echo running tests
-            mkdir -p ~/test-results/junit/
-            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
-          when always
-          -store_test_results
-            path ~/test-results/junit
-          -store_artifacts
-            path ~/test-results/junit
+      — checkout
+      -run mvn test
+      -run
+        name Save results
+        command |
+          echo running tests
+          mkdir -p ~/test-results/junit/
+          find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
+        when always
+        -store_test_results
+          path ~/test-results/junit
+        -store_artifacts
+          path ~/test-results/junit
 
 
 
