@@ -4,8 +4,8 @@ jobs:
     docker:
       — image: circleci/openjdk:8-jdk
     steps:
-      checkout
-      run mvn test
+      -checkout
+      -run mvn test
 
 
 
