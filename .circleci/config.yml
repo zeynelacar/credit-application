@@ -3,11 +3,11 @@ jobs: # a collection of steps
   build:
 
     docker: # run the steps with Docker
-    — image: circleci/openjdk:8-jdk-stretch # …with this image as the primary container; this is where all `steps` will run
+      — image: circleci/openjdk:8-jdk-stretch # …with this image as the primary container; this is where all `steps` will run
 
     steps: # a collection of executable commands
       — checkout
-    # — run: ./mvnw clean install # mvn clean install tells Maven to do the clean phase in each module before running the install phase for each module.
+      # — run: ./mvnw clean install # mvn clean install tells Maven to do the clean phase in each module before running the install phase for each module.
       - run: mvn test
       - run:
           name: Save results
