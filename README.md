@@ -20,13 +20,15 @@ User signup and signin services open to anyone.<br>
 - Docker for containerization.
 - CircleCI for automated CI processes.
 - OpenAPI for documentation.
+- H2 In-memory database integration.
 
 
 ### Database
 
 For database, project uses PostgreSQL, it uses the port at 5342. Contains three 6 tables, 3 of them for core project, and other three for security implementations.
-Tables does not have connections with eachother because they are considered as like they are totally separate entities that are just get in touch with eachother in some service scenerio.
-JPA/Hibernate is used for Object Relational Mapping with the database.
+Tables does not have connections with each other because they are considered as like they are totally separate entities that are just get in touch with eachother in some service scenerio.
+JPA/Hibernate is used for Object Relational Mapping with the database. H2 in-memory database implemented with addition of profiles. When the active profile
+is local profile H2 database becomes active. Postgreqsl runs on main profile.
 
 ### Architecture & Development Process
 
