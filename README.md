@@ -54,7 +54,6 @@ However their standard and effects are tested locally with use of Postman by man
 
 Docker used for containerization, project containerized however, database did not. So it may cause problems of integration. 
 Docker-compose has been considered however not been implemented. CircleCI config file created. Its been rough however it works yet because of the problem previously mentioned.
-It runs into integration error.
 
 ### Documentation
 
