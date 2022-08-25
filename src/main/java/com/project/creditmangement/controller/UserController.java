@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
+
     private UserService userService;
 
     @PostMapping("/signin")
