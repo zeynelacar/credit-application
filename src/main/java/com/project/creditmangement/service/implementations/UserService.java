@@ -7,6 +7,7 @@ import com.project.creditmangement.repository.RoleRepository;
 import com.project.creditmangement.security.TokenProvider;
 import com.project.creditmangement.security.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
