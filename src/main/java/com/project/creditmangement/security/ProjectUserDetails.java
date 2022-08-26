@@ -1,6 +1,6 @@
 package com.project.creditmangement.security;
 
-import com.project.creditmangement.model.User;
+import com.project.creditmangement.model.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

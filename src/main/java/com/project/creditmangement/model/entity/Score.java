@@ -1,4 +1,4 @@
-package com.project.creditmangement.model;
+package com.project.creditmangement.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

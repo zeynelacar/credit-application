@@ -1,6 +1,5 @@
-package com.project.creditmangement.model;
+package com.project.creditmangement.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.Getter;
 

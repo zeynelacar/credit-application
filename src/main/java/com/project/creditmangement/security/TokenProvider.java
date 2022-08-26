@@ -2,7 +2,7 @@ package com.project.creditmangement.security;
 
 
 import com.project.creditmangement.exception.CustomAuthenticationException;
-import com.project.creditmangement.model.Role;
+import com.project.creditmangement.model.entity.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;

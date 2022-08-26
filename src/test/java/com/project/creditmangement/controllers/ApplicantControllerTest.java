@@ -5,8 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.project.creditmangement.controller.ApplicantController;
 import com.project.creditmangement.exception.handler.GenericHandler;
-import com.project.creditmangement.model.Applicant;
-import com.project.creditmangement.service.ApplicantService;
+import com.project.creditmangement.model.entity.Applicant;
 import com.project.creditmangement.service.implementations.ApplicantServiceImpl;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +24,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;

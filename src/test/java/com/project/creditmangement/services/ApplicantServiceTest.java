@@ -1,23 +1,16 @@
 package com.project.creditmangement.services;
 
 import com.project.creditmangement.exception.NotFoundException;
-import com.project.creditmangement.model.Applicant;
+import com.project.creditmangement.model.entity.Applicant;
 import com.project.creditmangement.repository.ApplicantRepository;
-import com.project.creditmangement.service.ApplicantService;
 import com.project.creditmangement.service.implementations.ApplicantServiceImpl;
-import junit.framework.TestCase;
-import org.aspectj.weaver.ast.Not;
 import org.junit.jupiter.api.Test;
 import org.junit.Assert;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
 import java.util.Arrays;
 import java.util.List;

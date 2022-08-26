@@ -1,10 +1,6 @@
 package com.project.creditmangement.service;
 
-import com.project.creditmangement.model.Applicant;
-import com.project.creditmangement.model.Score;
-
-
-import java.util.List;
+import com.project.creditmangement.model.entity.Score;
 
 public interface ScoreService {
 

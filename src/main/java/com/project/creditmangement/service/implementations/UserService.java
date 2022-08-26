@@ -1,25 +1,20 @@
 package com.project.creditmangement.service.implementations;
 import com.project.creditmangement.exception.CustomAuthenticationException;
-import com.project.creditmangement.model.Role;
-import com.project.creditmangement.model.User;
-import com.project.creditmangement.model.dto.UserLoginDTO;
+import com.project.creditmangement.model.entity.Role;
+import com.project.creditmangement.model.entity.User;
 import com.project.creditmangement.repository.RoleRepository;
 import com.project.creditmangement.security.TokenProvider;
 import com.project.creditmangement.security.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
