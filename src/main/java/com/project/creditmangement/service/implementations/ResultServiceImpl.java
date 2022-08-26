@@ -1,5 +1,6 @@
 package com.project.creditmangement.service.implementations;
 
+import com.project.creditmangement.cache.CacheManager;
 import com.project.creditmangement.exception.NotFoundException;
 import com.project.creditmangement.model.entity.Applicant;
 import com.project.creditmangement.model.entity.Result;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 @RequiredArgsConstructor
 @Service
@@ -24,10 +27,21 @@ public class ResultServiceImpl implements ResultService {
 
     private final ApplicantService applicantService;
 
-
+    private final CacheManager cacheManager;
+    @Autowired
+    public void createCache(){
+        List<Result> allResults = resultRepository.findAll();
+        if(!allResults.isEmpty())
+            cacheManager.cacheAll("Results",allResults);
+    }
     @Override
     public List<Result> getAllResults() {
-        return resultRepository.findAll();
+        try {
+            List<Result> results = (List<Result>) (Object) cacheManager.getAll("Results");
+            return results;
+        }catch(Exception e){
+            throw new NotFoundException("No result found in the system");
+        }
     }
 
     @Override

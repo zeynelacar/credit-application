@@ -24,7 +24,7 @@ public class ResultController {
     private final ResultService resultService;
 
 
-    @GetMapping(value ="/results")
+    @GetMapping(value ="/results/all")
     public List<ResultDTO> getAllResults(){
         List<Result> results =   resultService.getAllResults();
         return results.stream().map(ResultMapper::toDto).collect(Collectors.toList());

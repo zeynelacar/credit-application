@@ -72,5 +72,8 @@ VALUES ('ROLE_ADMIN');
 INSERT INTO "role" (role_name)
 VALUES ('ROLE_USER');
 
+INSERT INTO "application_results"(national_no, application_result, credit_limit)
+VALUES ('10203456111','approved',15000);
+
 INSERT INTO "user"(username,email,password)
 VALUES ('zeynel','admin@adminonline.com','zeynelacar');

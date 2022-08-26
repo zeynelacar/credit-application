@@ -1,10 +1,12 @@
 package com.project.creditmangement.model.entity;
 
+import com.project.creditmangement.cache.Cache;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
+import org.jetbrains.annotations.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -18,7 +20,7 @@ import java.io.Serializable;
 @Builder
 @Entity
 @Table(name = "applicants")
-public class Applicant implements Serializable {
+public class Applicant extends Cache implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,4 +43,10 @@ public class Applicant implements Serializable {
 
     @NotNull
     private String phone;
+
+    @Nullable
+    @Override
+    public String getKey() {
+        return String.format("%s",this.nationalNo);
+    }
 }

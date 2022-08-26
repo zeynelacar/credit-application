@@ -21,7 +21,7 @@ public class ApplicantMapper {
         applicant.setName(applicantDTO.getName());
         applicant.setSurname(applicantDTO.getSurname());
         applicant.setNationalNo(applicantDTO.getNationalNo());
-        applicant.setMonthlyIncome(applicant.getMonthlyIncome());
+        applicant.setMonthlyIncome(applicantDTO.getMonthlyIncome());
         applicant.setPhone(applicantDTO.getPhone());
         return applicant;
     }
