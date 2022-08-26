@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
+
 public class ApplicantServiceImpl implements ApplicantService {
 
     private final ApplicantRepository applicantRepository;
@@ -35,8 +38,13 @@ public class ApplicantServiceImpl implements ApplicantService {
 
     @Override
     public List<Applicant> getAllApplicants() {
-        List<Applicant> applicants = (List<Applicant>) (Object) cacheManager.getAll("Applicants");
-        return applicants;
+        try{
+            List<Applicant> applicants = (List<Applicant>) (Object) cacheManager.getAll("Applicants");
+            return applicants;
+        }catch(Exception ex){
+            throw new NotFoundException("No applicant found");
+        }
+
     }
     @Override
     public Applicant getApplicant(String nationalId) {
@@ -71,7 +79,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
     @Override
     public boolean deleteApplicant(String nationalId) {
-        applicantRepository.delete(getApplicant((nationalId)));
+        applicantRepository.deleteByNationalNo(nationalId);
         return true;
     }
 }
