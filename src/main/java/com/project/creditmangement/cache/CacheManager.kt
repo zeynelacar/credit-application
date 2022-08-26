@@ -28,7 +28,7 @@ public class CacheManager {
         trueCache.put(cacheName,cache)
     }
 
-    fun cache(name: String?,k: String?,v: Object) {
+    fun cache(name: String?,k: String?,v: Any) {
         if(!trueCache.containsKey(name)){
             val inCache = linkedMapOf<String?,Any>()
             trueCache.put(name,inCache)
