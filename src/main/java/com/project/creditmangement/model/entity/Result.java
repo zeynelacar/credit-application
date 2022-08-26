@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,10 +19,8 @@ import javax.validation.constraints.Size;
 @Table(name="application_results")
 public class Result {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
 
+    @Id
     @Column(name = "national_no")
     @Size(min=11,max=11,message = "National Identity Number must be 11 characters")
     private String nationalNo;

@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 @Data
 public class ApplicantDTO {
 
+    private Integer id;
+
     @NotBlank
     private String name;
 

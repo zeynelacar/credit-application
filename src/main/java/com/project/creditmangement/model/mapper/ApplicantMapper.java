@@ -7,6 +7,7 @@ public class ApplicantMapper {
 
     public static ApplicantDTO toDto(Applicant applicant){
         ApplicantDTO applicantDTO = new ApplicantDTO();
+        applicantDTO.setId(applicant.getId());
         applicantDTO.setName(applicant.getName());
         applicantDTO.setSurname(applicant.getSurname());
         applicantDTO.setNationalNo(applicant.getNationalNo());

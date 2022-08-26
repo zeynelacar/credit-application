@@ -38,6 +38,7 @@ public class ApplicantController {
         return res;
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping(value ="/add")
     public void addApplicant(@RequestBody ApplicantDTO applicantDTO){
         applicantService.addApplicant(ApplicantMapper.toEntity(applicantDTO));
