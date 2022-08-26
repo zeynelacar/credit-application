@@ -1,8 +1,8 @@
 package com.project.creditmangement.service.implementations;
 
 import com.project.creditmangement.exception.NotFoundException;
-import com.project.creditmangement.model.Applicant;
-import com.project.creditmangement.model.Result;
+import com.project.creditmangement.model.entity.Applicant;
+import com.project.creditmangement.model.entity.Result;
 import com.project.creditmangement.repository.ResultRepository;
 import com.project.creditmangement.service.ApplicantService;
 import com.project.creditmangement.service.ResultService;

@@ -1,6 +1,6 @@
 package com.project.creditmangement.security;
 
-import com.project.creditmangement.model.User;
+import com.project.creditmangement.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,9 @@
 package com.project.creditmangement.services;
 
 
-import com.project.creditmangement.model.Applicant;
-import com.project.creditmangement.model.Result;
-import com.project.creditmangement.model.Score;
+import com.project.creditmangement.model.entity.Applicant;
+import com.project.creditmangement.model.entity.Result;
+import com.project.creditmangement.model.entity.Score;
 import com.project.creditmangement.repository.ApplicantRepository;
 import com.project.creditmangement.repository.ResultRepository;
 import com.project.creditmangement.repository.ScoreRepository;
@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
@@ -49,9 +48,9 @@ public class ResultServiceTest {
      @Test
      void getAllResultsTest() {
          List<Result> expectedResults = Arrays.asList(
-                 new Result(1,"33333333333","Denied",null),
-                 new Result(2,"33333333322","Approved",10000),
-                 new Result(3,"33333333311","Approved",20000)
+                 new Result("33333333333","Denied",null),
+                 new Result("33333333322","Approved",10000),
+                 new Result("33333333311","Approved",20000)
          );
 
          //stub-when
@@ -64,7 +63,7 @@ public class ResultServiceTest {
          for(Result expected : expectedResults){
              Optional<Result> actual = allResults
                      .stream().filter(
-                             result -> result.getId().equals(expected.getId())
+                             result -> result.getNationalNo().equals(expected.getNationalNo())
                      ).findFirst();
              Assert.assertEquals(expected.getNationalNo(),actual.get().getNationalNo());
              Assert.assertEquals(expected.getApplicationResult(),actual.get().getApplicationResult());

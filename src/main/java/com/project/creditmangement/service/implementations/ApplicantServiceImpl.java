@@ -1,16 +1,13 @@
 package com.project.creditmangement.service.implementations;
 
 import com.project.creditmangement.exception.NotFoundException;
-import com.project.creditmangement.model.Applicant;
+import com.project.creditmangement.model.entity.Applicant;
 import com.project.creditmangement.repository.ApplicantRepository;
 import com.project.creditmangement.service.ApplicantService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service

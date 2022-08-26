@@ -1,7 +1,7 @@
 package com.project.creditmangement.services;
 
-import com.project.creditmangement.model.Applicant;
-import com.project.creditmangement.model.Score;
+import com.project.creditmangement.model.entity.Applicant;
+import com.project.creditmangement.model.entity.Score;
 import com.project.creditmangement.repository.ScoreRepository;
 import com.project.creditmangement.service.ApplicantService;
 import com.project.creditmangement.service.implementations.ScoreServiceImpl;
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

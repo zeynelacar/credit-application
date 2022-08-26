@@ -1,13 +1,11 @@
 package com.project.creditmangement.controller;
 
-import com.project.creditmangement.model.User;
+import com.project.creditmangement.model.entity.User;
 import com.project.creditmangement.model.dto.UserLoginDTO;
+import com.project.creditmangement.model.mapper.UserMapper;
 import com.project.creditmangement.service.implementations.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Validated
 @RestController
@@ -23,8 +21,9 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String signup(@RequestBody User user) {
-        return userService.signup(user);
+    public String signup(@RequestBody UserLoginDTO user) {
+        UserMapper userMapper = new UserMapper();
+        return userService.signup(userMapper.map(user, User.class));
     }
 
     @DeleteMapping(value = "/delete/{username}")

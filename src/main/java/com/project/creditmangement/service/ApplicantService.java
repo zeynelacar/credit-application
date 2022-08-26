@@ -1,6 +1,6 @@
 package com.project.creditmangement.service;
 
-import com.project.creditmangement.model.Applicant;
+import com.project.creditmangement.model.entity.Applicant;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;

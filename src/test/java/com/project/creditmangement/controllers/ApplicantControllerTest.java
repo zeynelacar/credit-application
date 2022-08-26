@@ -5,8 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.project.creditmangement.controller.ApplicantController;
 import com.project.creditmangement.exception.handler.GenericHandler;
-import com.project.creditmangement.model.Applicant;
-import com.project.creditmangement.service.ApplicantService;
+import com.project.creditmangement.model.dto.ApplicantDTO;
+import com.project.creditmangement.model.entity.Applicant;
+import com.project.creditmangement.model.mapper.ApplicantMapper;
 import com.project.creditmangement.service.implementations.ApplicantServiceImpl;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +26,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -57,7 +57,7 @@ public class ApplicantControllerTest {
 
 
     @Test
-    void getAllAirportCompanies() throws Exception {
+    void getAllApplicants() throws Exception {
         // init test values / given
         List<Applicant> expectedApplicants = getTestApplicants();
 
@@ -103,13 +103,18 @@ public class ApplicantControllerTest {
 
         // init test values
         List<Applicant> expectedApplicants = getTestApplicants();
-        Applicant expectedApplicant = new Applicant(5,"avni","silik","11111111199",1000,"05004003050");
-        expectedApplicants.add(expectedApplicant);
+        ApplicantDTO expectedApplicant = new ApplicantDTO() ;//(5,"avni","silik","11111111199",1000,"05004003050");
+        expectedApplicant.setName("avni");
+        expectedApplicant.setSurname("silik");
+        expectedApplicant.setNationalNo("11111111199");
+        expectedApplicant.setMonthlyIncome(1000);
+        expectedApplicant.setPhone("05004003050");
+
 
         // stub - given
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        String expectedApplicantJsonStr = ow.writeValueAsString(expectedApplicant);
-        Mockito.doNothing().when(applicantService).addApplicant(expectedApplicant);
+        String expectedApplicantJsonStr = ow.writeValueAsString((expectedApplicant));
+        Mockito.doNothing().when(applicantService).addApplicant(ApplicantMapper.toEntity(expectedApplicant));
 
         MockHttpServletResponse response = mvc.perform(post("/applicant/add")
                         .accept(MediaType.APPLICATION_JSON)
@@ -128,13 +133,18 @@ public class ApplicantControllerTest {
     void updateApplicant() throws Exception {
 
         List<Applicant> expectedApplicants = getTestApplicants();
-        Applicant expectedApplicant = new Applicant(1,"avni","silik","11111111111",1500,"05004003050");
-        expectedApplicants.add(expectedApplicant);
+        ApplicantDTO expectedApplicant = new ApplicantDTO() ;//(5,"avni","silik","11111111199",1000,"05004003050");
+        expectedApplicant.setName("avni");
+        expectedApplicant.setSurname("silik");
+        expectedApplicant.setNationalNo("11111111199");
+        expectedApplicant.setMonthlyIncome(1000);
+        expectedApplicant.setPhone("05004003050");
+        //expectedApplicants.add(expectedApplicant);
 
         // stub - given
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String expectedApplicantJsonStr = ow.writeValueAsString(expectedApplicant);
-        Mockito.doReturn(expectedApplicant).when(applicantService).updateApplicant(expectedApplicant);
+        Mockito.doReturn(ApplicantMapper.toEntity(expectedApplicant)).when(applicantService).updateApplicant(ApplicantMapper.toEntity(expectedApplicant));
 
         MockHttpServletResponse response = mvc.perform(put("/applicant/update")
                         .accept(MediaType.APPLICATION_JSON)

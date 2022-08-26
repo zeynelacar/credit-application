@@ -1,17 +1,13 @@
 package com.project.creditmangement.service.implementations;
 
 import com.project.creditmangement.exception.InvalidRequestException;
-import com.project.creditmangement.exception.NotFoundException;
-import com.project.creditmangement.model.Applicant;
-import com.project.creditmangement.model.Score;
+import com.project.creditmangement.model.entity.Score;
 import com.project.creditmangement.repository.ScoreRepository;
 import com.project.creditmangement.service.ApplicantService;
 import com.project.creditmangement.service.ScoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 @RequiredArgsConstructor

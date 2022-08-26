@@ -1,6 +1,6 @@
 package com.project.creditmangement.repository;
 
-import com.project.creditmangement.model.Score;
+import com.project.creditmangement.model.entity.Score;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
