@@ -21,7 +21,9 @@ User signup and signin services open to anyone.<br>
 - CircleCI for automated CI processes.
 - OpenAPI for documentation.
 - H2 In-memory database integration.
+- Simple caching mechanism created with Kotlin. Works in-memory.
 
+To build the project "mvn clean compile:kotlin install" command can be used.
 
 ### Database
 
@@ -52,8 +54,8 @@ However their standard and effects are tested locally with use of Postman by man
 
 ### CI/CD
 
-Docker used for containerization, project containerized however, database did not. So it may cause problems of integration. 
-Docker-compose has been considered however not been implemented. CircleCI config file created. Its been rough however it works yet because of the problem previously mentioned.
+Docker used for containerization, project containerized however, database did not. So it may cause problems of integration if it runs in main profile. In local profile project uses in-memory database. 
+Docker-compose has been considered however not been implemented. CircleCI config file created.
 
 ### Documentation
 
