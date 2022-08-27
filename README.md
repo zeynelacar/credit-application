@@ -3,7 +3,7 @@
 Java Spring project for a credit application.
 
 ## Responsibilities
-This project contains the code of a credit application system. A applicant can register to system then make an application. 
+This project contains the code of a credit application system. An applicant can register to system then make an application. 
 Their application result will be returned to them immediately. In this application applicants can be deleted,added,updated,and can be listed.Viewing the applicants is privileged to
 authorized applicants however. Applications can be made by authenticated users, and they can search their results later by questioning with their national identity number. 
 User signup and signin services open to anyone.<br> 
