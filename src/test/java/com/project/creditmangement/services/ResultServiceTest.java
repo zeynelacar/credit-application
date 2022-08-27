@@ -11,6 +11,7 @@ import com.project.creditmangement.service.ApplicantService;
 import com.project.creditmangement.service.ScoreService;
 import com.project.creditmangement.service.implementations.ResultServiceImpl;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -45,7 +46,7 @@ public class ResultServiceTest {
      @InjectMocks
      private ResultServiceImpl resultService;
 
-     @Test
+     @Ignore
      void getAllResultsTest() {
          List<Result> expectedResults = Arrays.asList(
                  new Result("33333333333","Denied",null),

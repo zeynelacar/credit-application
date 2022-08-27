@@ -1,30 +1,56 @@
 package com.project.creditmangement.service.implementations;
 
+import com.project.creditmangement.cache.Cache;
+import com.project.creditmangement.cache.CacheManager;
 import com.project.creditmangement.exception.NotFoundException;
 import com.project.creditmangement.model.entity.Applicant;
 import com.project.creditmangement.repository.ApplicantRepository;
 import com.project.creditmangement.service.ApplicantService;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @RequiredArgsConstructor
 @Service
+
 public class ApplicantServiceImpl implements ApplicantService {
 
     private final ApplicantRepository applicantRepository;
 
-    @Override
-    public List<Applicant> getAllApplicants() {
-        return applicantRepository.findAll();
+    private final CacheManager cacheManager;
+
+
+    @Autowired
+    public void createCache(){
+        List<Applicant> allApplicants = applicantRepository.findAll();
+        if(!allApplicants.isEmpty())
+            cacheManager.cacheAll("Applicants",allApplicants);
     }
 
+    @Override
+    public List<Applicant> getAllApplicants() {
+        try{
+            List<Applicant> applicants = (List<Applicant>) (Object) cacheManager.getAll("Applicants");
+            return applicants;
+        }catch(Exception ex){
+            throw new NotFoundException("No applicant found");
+        }
+
+    }
     @Override
     public Applicant getApplicant(String nationalId) {
 
         try {
-            Applicant applicant = applicantRepository.findByNationalNo(nationalId);
+            Applicant applicant = (Applicant) cacheManager.get("Applicants",nationalId);
             return applicant;
         }catch(Exception e){
             throw new NotFoundException("Applicant");
@@ -53,7 +79,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
     @Override
     public boolean deleteApplicant(String nationalId) {
-        applicantRepository.delete(getApplicant((nationalId)));
+        applicantRepository.deleteByNationalNo(nationalId);
         return true;
     }
 }

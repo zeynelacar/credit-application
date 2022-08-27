@@ -20,7 +20,7 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
-      - run: mvn test
+      - run: mvn surefire:test
       - run:
           name: Save test results
           command: |

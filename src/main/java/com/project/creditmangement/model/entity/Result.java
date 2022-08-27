@@ -1,10 +1,12 @@
 package com.project.creditmangement.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.project.creditmangement.cache.Cache;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
@@ -17,7 +19,7 @@ import javax.validation.constraints.Size;
 @Builder
 @Entity
 @Table(name="application_results")
-public class Result {
+public class Result extends Cache {
 
 
     @Id
@@ -32,5 +34,9 @@ public class Result {
     private Integer limit;
 
 
-
+    @Nullable
+    @Override
+    public String getKey() {
+        return String.format("%s",this.nationalNo);
+    }
 }
