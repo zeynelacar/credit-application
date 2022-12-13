@@ -17,17 +17,17 @@ public class CacheManager {
 
     fun cacheAll(cacheName: String?, entities: List<Cache>)  {
         val cache = LinkedHashMap<String?, Any>()
-        entities.stream().forEach { entity: Cache -> cache.put(entity.key,entity) }
+        entities.stream().forEach { entity: Cache -> cache[entity.key] = entity }
         logger.info("{} cached with [{}] rows",cacheName,entities.size )
-        trueCache.put(cacheName,cache)
+        trueCache[cacheName] = cache
     }
 
     fun cache(name: String?,k: String?,v: Any) {
         if(!trueCache.containsKey(name)){
             val inCache = linkedMapOf<String?,Any>()
-            trueCache.put(name,inCache)
+            trueCache[name] = inCache
         }
-        trueCache.get(name)?.put(k,v)
+        trueCache[name]?.put(k,v)
     }
 
     fun get(name: String?,k: String?): Cache?{
@@ -35,7 +35,7 @@ public class CacheManager {
     }
 
     fun getAll(name:String?): MutableList<Any>? {
-        return trueCache.get(name)?.values?.stream()?.collect(Collectors.toList())
+        return trueCache[name]?.values?.stream()?.collect(Collectors.toList())
     }
 
 }
