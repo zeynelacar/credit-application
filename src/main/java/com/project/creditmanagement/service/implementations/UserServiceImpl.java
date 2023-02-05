@@ -5,6 +5,7 @@ import com.project.creditmanagement.model.entity.User;
 import com.project.creditmanagement.repository.RoleRepository;
 import com.project.creditmanagement.security.TokenProvider;
 import com.project.creditmanagement.security.UserRepository;
+import com.project.creditmanagement.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 

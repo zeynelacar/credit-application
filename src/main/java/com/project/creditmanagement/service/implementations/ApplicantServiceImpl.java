@@ -34,9 +34,8 @@ public class ApplicantServiceImpl implements ApplicantService {
     @Override
     public List<Applicant> getAllApplicants() {
         try {
-            while (isCacheAvail()) {
-                List<Applicant> applicants = (List<Applicant>) (Object) cacheManager.getAll("Applicants");
-                return applicants;
+            if (isCacheAvail()) {
+                return (List<Applicant>) (Object) cacheManager.getAll("Applicants");
             }return applicantRepository.findAll();
         }catch(Exception ex){
             throw new NotFoundException("No applicant found");
@@ -47,9 +46,8 @@ public class ApplicantServiceImpl implements ApplicantService {
     public Applicant getApplicant(String nationalId) {
 
         try {
-            while (isCacheAvail()){
-            Applicant applicant = (Applicant) cacheManager.get("Applicants",nationalId);
-            return applicant;
+            if (isCacheAvail()){
+                return (Applicant) cacheManager.get("Applicants",nationalId);
             } return applicantRepository.findByNationalNo(nationalId);
         }catch(Exception e){
             throw new NotFoundException("Applicant");
